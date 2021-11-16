@@ -17,3 +17,7 @@ const kMessageContainerDecoration = BoxDecoration(
     top: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
   ),
 );
+
+const String kHeroLogoTag = 'logo';
+
+const String kLogoImage = 'images/logo.png';

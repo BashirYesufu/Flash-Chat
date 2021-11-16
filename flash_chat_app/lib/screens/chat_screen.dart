@@ -3,7 +3,7 @@ import 'package:flash_chat_app/constants.dart';
 
 class ChatScreen extends StatefulWidget {
 
-  static String id = 'chat_screen';
+  static const String id = 'chat_screen';
   const ChatScreen({Key? key}) : super(key: key);
 
   @override
