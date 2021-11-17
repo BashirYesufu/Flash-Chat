@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "223863918848",
+    "project_id": "flash-chat-d3d5d",
+    "storage_bucket": "flash-chat-d3d5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223863918848:android:e57892d4ab1479335ee3e5",
+        "android_client_info": {
+          "package_name": "com.iCoderHub.flash_chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223863918848-r0h8lebr4u0vg678uspkcrs0jj9ctj09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZY9P_d1wlwr9k-OIuOzFUG21pxJYvXgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223863918848-r0h8lebr4u0vg678uspkcrs0jj9ctj09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
