@@ -27,14 +27,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
       vsync: this,
       duration: Duration(seconds: 1),
     );
-
     animation = ColorTween(begin: Colors.white, end: Colors.blueGrey ).animate(controller!);
-
     controller!.reverse(from: 1.0);
-
     controller!.addListener(() {
       setState(() {});
-      print(animation!.value);
     });
   }
 

@@ -26,6 +26,9 @@ class PaddedColorButton extends StatelessWidget {
           height: 42.0,
           child: Text(
             textChild,
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
       ),

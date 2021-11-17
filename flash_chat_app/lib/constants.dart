@@ -23,9 +23,6 @@ const String kHeroLogoTag = 'logo';
 const String kLogoImage = 'images/logo.png';
 
 const kTextFieldDecoration = InputDecoration(
-  hintStyle: TextStyle(
-      color: Colors.grey
-  ),
   contentPadding:
   EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border: OutlineInputBorder(
