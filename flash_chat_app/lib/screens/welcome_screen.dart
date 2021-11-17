@@ -3,7 +3,7 @@ import 'package:flash_chat_app/screens/login_screen.dart';
 import 'package:flash_chat_app/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import '../padded_color_button.dart';
+import '../components/padded_color_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
 
