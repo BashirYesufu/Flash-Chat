@@ -4,6 +4,7 @@ import 'package:flash_chat_app/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import '../components/padded_color_button.dart';
 
+
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
   const LoginScreen({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   String email = '';
   String password = '';
+  bool showSpinner = false;
 
   @override
   Widget build(BuildContext context) {
