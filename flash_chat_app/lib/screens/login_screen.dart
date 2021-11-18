@@ -1,18 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat_app/constants.dart';
+import 'package:flash_chat_app/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../components/padded_color_button.dart';
 
 class LoginScreen extends StatefulWidget {
-
   static const String id = 'login_screen';
   const LoginScreen({Key? key}) : super(key: key);
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  final _auth = FirebaseAuth.instance;
+  String email = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
               autocorrect: false,
               textCapitalization: TextCapitalization.none,
               onChanged: (value) {
-                //Do something with the user input.
+                email = value;
               },
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Enter your email'
@@ -54,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
               autocorrect: false,
               textCapitalization: TextCapitalization.none,
               onChanged: (value) {
-                //Do something with the user input.
+                password = value;
               },
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Enter your password',
@@ -64,7 +68,17 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 24.0,
             ),
             PaddedColorButton(
-              onPressed: () {},
+              onPressed: () async {
+                try {
+                  await _auth.signInWithEmailAndPassword(
+                      email: email,
+                      password: password
+                  );
+                  Navigator.pushNamed(context, ChatScreen.id);
+                } catch (e) {
+                  print(e);
+                }
+              },
               color: Colors.lightBlueAccent,
               textChild: 'Log In',
             ),

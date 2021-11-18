@@ -39,6 +39,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
     controller!.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
