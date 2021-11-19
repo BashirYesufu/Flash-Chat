@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat_app/components/message_stream.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,6 +14,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
 
+  final messageTextController = TextEditingController();
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   User? loggedInUser;
@@ -37,14 +39,14 @@ class _ChatScreenState extends State<ChatScreen> {
   //   }
   // }
 
-  void messagesStream() async {
-    var snapshots = await _firestore.collection('messages').snapshots();
-    await for(var snapshot in snapshots) {
-      for (var message in snapshot.docs) {
-        print(message.data());
-      }
-    }
-  }
+  // void messagesStream() async {
+  //   var snapshots = await _firestore.collection('messages').snapshots();
+  //   await for(var snapshot in snapshots) {
+  //     for (var message in snapshot.docs) {
+  //       print(message.data());
+  //     }
+  //   }
+  // }
 
   @override
   void initState() {
@@ -60,10 +62,9 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.close),
-              onPressed: () {
-                messagesStream();
-                // await _auth.signOut();
-                // Navigator.pop(context);
+              onPressed: () async {
+                await _auth.signOut();
+                Navigator.pop(context);
               }),
         ],
         title: Text('⚡️Chat'),
@@ -75,26 +76,7 @@ class _ChatScreenState extends State<ChatScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
 
-            StreamBuilder<QuerySnapshot>(
-              stream: _firestore.collection('messages').snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List<Text> messageWidgets = [];
-                  final messages = snapshot.data!.docs;
-                  for (var message in messages) {
-                    final messageData = message.data()! as Map<String, dynamic>;
-                    final messageText = messageData['text'];
-                    final messageSender = messageData['sender'];
-                    final messageWidget = Text('$messageText from $messageSender');
-                    messageWidgets.add(messageWidget);
-                  }
-                  return Column(
-                    children: messageWidgets,
-                  );
-                }
-                throw 'Error getting text';
-              },
-            ),
+            MessageStream(firestore: _firestore),
 
             Container(
               decoration: kMessageContainerDecoration,
@@ -103,6 +85,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      controller: messageTextController,
                       onChanged: (value) {
                         messageText = value;
                       },
@@ -111,10 +94,15 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      _firestore.collection('messages').add({
-                        'text': messageText,
-                        'sender': loggedInUser!.email,
-                      });
+                      if (messageText != '') {
+                        _firestore.collection('messages').add({
+                          'text': messageText,
+                          'sender': loggedInUser!.email,
+                        });
+                        setState(() {
+                          messageTextController.text = '';
+                        });
+                      }
                     },
                     child: Text(
                       'Send',
